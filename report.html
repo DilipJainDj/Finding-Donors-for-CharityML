@@ -13899,7 +13899,70 @@ It is a ratio of true positives(words classified as spam, and which are actually
 <li><strong>Gradient Boosting</strong></li>
 <li><strong>Logistic Regression</strong> </li>
 </ul>
+<h2 id="1.-Random-Forest-Classifier:">1. <em>Random Forest Classifier:</em><a class="anchor-link" href="#1.-Random-Forest-Classifier:">&#182;</a></h2><ul>
+<li><strong>Application</strong> : Xbox Kinnect, where Random Forest is used for Real time Human Pose Recognition.</li>
+<li><strong>Strength</strong> : <ul>
+<li>Scale quickly, have ability to deal with unbalanced and missing data</li>
+<li>Generates an internal unbiased estimate of generalization error as forest building progresses.</li>
+<li>Provides an expeimental way to detect variable interactions.</li>
+</ul>
+</li>
+<li><strong>Weakness</strong> :<ul>
+<li>Less effective on noisier-larger datasets with overlapping classes.</li>
+<li>large number of trees may lead to slow real-time prediction in some cases.</li>
+</ul>
+</li>
+<li><strong>Candidacy</strong> :<ul>
+<li>RandomForest are always a safe bet as they generally have high average accuracy rate for most cases and work well for complex classification tasks as well.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2.-Gradient-Boosting-Classifier:">2. <em>Gradient Boosting Classifier:</em><a class="anchor-link" href="#2.-Gradient-Boosting-Classifier:">&#182;</a></h2><ul>
+<li><strong>Application</strong> : Higgs Boson Discovery from the Large Hadron Collider dataset. Physicits can extract signal of Higgs Boson particle from background noises which potentially leading to major breakthroghs in modern physics. </li>
+<li><strong>Strength</strong> : <ul>
+<li>It builds new trees which complement the already built trees. The new trees which will be built will help to correct errors in the previously built trees. This can produce highly accurate results with less trees.</li>
+<li>Can handle different types of predictor variables and accomodate missing data.</li>
+</ul>
+</li>
+<li><strong>Weakness</strong> :<ul>
+<li>Unable to compute conditional class probabilites</li>
+<li>Suffers from long sequential computation times.</li>
+<li>More parameters to tune.</li>
+</ul>
+</li>
+<li><strong>Candidacy</strong> :<ul>
+<li>Since, this model produces good accurate results, this makes it a very good candidate for the problem.</li>
+</ul>
+</li>
+</ul>
+<h2 id="3.-Logistic-Regression:">3. <em>Logistic Regression:</em><a class="anchor-link" href="#3.-Logistic-Regression:">&#182;</a></h2><ul>
+<li><strong>Application</strong> : Logistic regression is used in various fields, including machine learning, most medical fields, and social sciences. For example, the Trauma and Injury Severity Score (TRISS), which is widely used to predict mortality in injured patients, was originally developed by Boyd et al. using logistic regression.</li>
+<li><strong>Strength</strong> : <ul>
+<li>Feature scaling not needed: Does not require input features to be scaled (can work with scaled features too, but doesn’t require scaling)</li>
+</ul>
+</li>
+<li>Tuning of hyperparameters not needed.</li>
+<li><p><strong>Cons</strong>:</p>
+<ul>
+<li>Poor performance with irrelevant and highly correlated features (use Boruta plot for removing similar or correlated features and irrelevant features).</li>
+<li>High reliance on proper presentation of data. All the important variables / features should be identified for it to work well.</li>
+</ul>
+</li>
+<li><p><strong>Candidacy</strong> :</p>
+<ul>
+<li>logistic regression would provide more flexibility should we get additional data or decide to experiment with different thresholds (e.g. $60k instead of $50k).</li>
+</ul>
+</li>
+</ul>
 <p>These three models are best candidates for this classificaion task.</p>
+<p><strong>Reference</strong></p>
+<ul>
+<li><a href="https://www.quora.com/What-are-the-advantages-and-disadvantages-for-a-random-forest-algorithm">https://www.quora.com/What-are-the-advantages-and-disadvantages-for-a-random-forest-algorithm</a></li>
+<li><a href="https://explained.ai/gradient-boosting/">https://explained.ai/gradient-boosting/</a></li>
+<li><a href="https://www.analyticsvidhya.com/blog/2015/09/complete-guide-boosting-methods/">https://www.analyticsvidhya.com/blog/2015/09/complete-guide-boosting-methods/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Logistic_regression">https://en.wikipedia.org/wiki/Logistic_regression</a></li>
+<li><a href="https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/">https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/</a></li>
+</ul>
 
 </div>
 </div>
@@ -14150,20 +14213,47 @@ Look at the graph at the bottom left from the cell above(the visualization creat
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong> Gradient Boosting Classifier works by combining several simple learners (here: decision trees), to create an ensemble of learners that can predict whether an individual earns above 50k or not. Each of the learners are created using “features” of individuals(eg. race, sex, education etc) create a set of rules that can predict a person’s income.
-<strong>To understand gradient boosting we must first understand two important aspects of it: 1.Descison Trees 2.Boosting</strong></p>
-<p>1.) <strong>Descion Tree</strong></p>
+<strong>To understand gradient boosting we must first understand two important aspects of it:</strong></p>
 <ul>
-<li>This is basically defined as a decision support tool that uses tree like structure/model of decisions and their possible consequences. Here each node of the tree is a "test"(question),each branch is outcome of this test and each leaf represents a class label which we are trying to predict.</li>
-</ul>
+<li>1.Decision Trees </li>
+<li><p>2.Boosting</p>
+
+<pre><code>               Ensambling
+                  /\
+                 /  \
+                /    \
+               /      \
+              /        \
+          Boosting   Bagging
+              |         |
+              |         |
+           Gradient   Random
+           Boosting   Forest </code></pre>
+</li>
+<li><p><em>Boosting</em> is an ensemble technique in which the predictors are not made independently, but sequentially.</p>
 <ul>
-<li>So,by answering certain set questions one by one realting to the system we end up with potentially correct or incorrect answers,The strategy here is that the first set of questions have to be broad in order to</li>
+<li>This technique employs the logic in which the subsequent predictors learn from the mistakes of the previous predictors. </li>
+<li>The observations have an unequal probability of appearing in subsequent models and ones with the highest error appear most.</li>
+<li><em>Gradient Boosting</em> is an example of boosting algorithm.</li>
 </ul>
-<p>2.) <strong>Boosting</strong></p>
+</li>
+<li><p><em>Bagging</em> is a simple ensembling technique in which we build many independent predictors/models/learners and combine them using some model averaging techniques.</p>
 <ul>
-<li>This is best explained by an example of a factory worker,who is working in an assembly line and is trained to perform a specific task ,he/she performs well on in their local and very specific tasks but overall they can't do much and are quite weak for other tasks,but if we combine multiple workers each having different expertise/skills and make them work on their individual tasks,we end up making the final product efficiently.</li>
-<li>This is the basic idea behind boosting,here we bundle up multiple classifers and make a final model which works accurately in predicitng accross all areas of the dataset in question.</li>
+<li>We typically take random sub-sample/bootstrap of data for each model, so that all the models are little different from each other.</li>
+<li>Each observation is chosen with replacement to be used as input for each of the model.</li>
+<li>Example of bagging ensemble is <em>Random Forest models</em>.</li>
 </ul>
-<p><em>Gradient Boosting actaully does is quite smart,it makes small and weak decision trees and checks how many outcomes it has misclassified,then it builds another tree which helps to correct the errors made by previous tree by changing some parameters. This process keeps going on sequentially until we have reached a certain threshold of acceptable error rate and we end up with a single tree which is basically a combination of small weak decision trees.This final tree is more expressive and can address multiple areas efficiently.</em></p>
+</li>
+</ul>
+<h4 id="Gradient-Boosting-Algorithm">Gradient Boosting Algorithm<a class="anchor-link" href="#Gradient-Boosting-Algorithm">&#182;</a></h4><p>Gradient boosting is a machine learning technique for regression and classification problems, which produces a prediction model in the form of an ensemble of weak prediction models, typically decision trees.</p>
+<p>The objective of any supervised learning algorithm is to define a loss function and minimize it. Let’s see how maths work out for Gradient Boosting algorithm.</p>
+<p>In brief we can say that :-</p>
+<ul>
+<li>We first model data with simple models and analyze data for errors.</li>
+<li>These errors signify data points that are difficult to fit by a simple model.</li>
+<li>Then for later models, we particularly focus on those hard to fit data to get them right.</li>
+<li>In the end, we combine all the predictors by giving some weights to each predictor.</li>
+</ul>
 <p><strong>References</strong>:-</p>
 <ul>
 <li><a href="https://explained.ai/gradient-boosting/">https://explained.ai/gradient-boosting/</a></li>
